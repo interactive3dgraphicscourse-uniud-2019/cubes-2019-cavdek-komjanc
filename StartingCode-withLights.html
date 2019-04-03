@@ -26,6 +26,30 @@
 		<script>
 		
 		var scene, camera, renderer, controls, stats;
+		var macchina_completa;
+		var ruota;
+		var ruotaGeometry;
+		var ruotaMaterial;
+		var muso;
+		var musoGeometry;
+		var musoMaterial;
+		var corpo;
+		var corpoGeometry;
+		var corpoMaterial;
+		var alaAnteriore;
+		var alaAnterioreGeometry;
+		var alaAnterioreMaterial;
+		var retro;
+		var retroGeometry;
+		var retroMaterial;
+		var alettone;
+		var alettoneGeometry;
+		var alettoneMaterial;		
+		var tetto;
+		var tettoGeometry;
+		var tettoMaterial;
+
+		var colore;
 		
 		function Start() {
 			scene = new THREE.Scene();
@@ -50,7 +74,7 @@
 			cube.castShadow = true;
 			cube.receiveShadow = true;
 			
-			scene.add( cube );
+			//scene.add( cube );
 
 			hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 			hemiLight.color.setHSL( 0.6, 1, 0.6 );
@@ -84,15 +108,72 @@
 			document.body.appendChild( stats.domElement );
 			
 			// uncomment if you need to draw coordinate axes when building the scene
-			//Coordinates.drawAllAxes();
+			Coordinates.drawAllAxes();
 			
 			controls = new THREE.OrbitControls( camera );
 			controls.addEventListener( 'change', Render );
-			
+
+
+			//inizio here
+
+			macchina_completa = new THREE.Object3D();
+
+			colore=(Math.random()*0xffffff);
+
+			corpoGeometry = new THREE.BoxGeometry(4,1,2);
+			corpoMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
+			corpo=new THREE.Mesh(corpoGeometry,corpoMaterial);
+			corpo.position.set(-1,0,0);
+
+			musoGeometry = new THREE.BoxGeometry(3,1,1);
+			musoMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
+			muso=new THREE.Mesh(musoGeometry,musoMaterial);
+			//muso.add(tetto);
+			muso.position.set(2.5,0,0);
+
+			alaAnterioreGeometry=new THREE.BoxGeometry(1,1,3);
+			alaAnterioreMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
+			alaAnteriore=new THREE.Mesh(alaAnterioreGeometry,alaAnterioreMaterial);
+			alaAnteriore.position.set(4.5,0,0);
+
+			retroGeometry=new THREE.BoxGeometry(3,1,1);
+			retroMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
+			retro=new THREE.Mesh(retroGeometry,retroMaterial);
+			retro.position.set(-4.5,0,0);
+
+			tettoGeometry=new THREE.BoxGeometry(3,1,1)
+			tettoMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
+			tetto=new THREE.Mesh(tettoGeometry,tettoMaterial);
+			tetto.position.set(-2,1,0);
+
+			alettone=new THREE.Mesh(alaAnterioreGeometry,alaAnterioreMaterial); //alettone=ala anteriore
+			alettone.position.set(-5.5,1,0);
+
+			ruotaGeometry=new THREE.BoxGeometry(1,1,1);
+			ruotaMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide } );
+			ruota=[];
+			for (i=0; i<4; i++){
+				ruota[i] = new THREE.Mesh(ruotaGeometry,ruotaMaterial);
+				macchina_completa.add(ruota[i]);
+			}
+			ruota[0].position.set(2.5,0,1);
+			ruota[1].position.set(2.5,0,-1);
+			ruota[2].position.set(-4,0,1);
+			ruota[3].position.set(-4,0,-1);
+
+
+			macchina_completa.add(tetto);
+			macchina_completa.add(alettone);
+			macchina_completa.add(retro);
+			macchina_completa.add(alaAnteriore);
+			macchina_completa.add(muso);
+			macchina_completa.add(corpo);
+			scene.add(macchina_completa);
 			
 		}
 		
 		function Update() {
+			macchina_completa.position.x +=0.2;
 			requestAnimationFrame( Update );
 			controls.update();  
 			stats.update();
