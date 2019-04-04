@@ -123,7 +123,7 @@
 			document.body.appendChild( stats.domElement );
 
 			// uncomment if you need to draw coordinate axes when building the scene
-			Coordinates.drawAllAxes();
+			//Coordinates.drawAllAxes();
 
 			controls = new THREE.OrbitControls( camera );
 			//controls.addEventListener( 'change', Render );
@@ -141,7 +141,10 @@
 
 			albero = creaAlbero();
 			scene.add(albero);
-			albero.position.set(100,4,1);
+			albero.position.set(100,4,-10);
+			albero2 = creaAlbero();
+			scene.add(albero2);
+			albero2.position.set(169,4,10);
 
 			var fontLoader = new THREE.FontLoader();
 			fontLoader.load( 'fonts/helvetiker_bold.typeface.json', function ( font ) {
@@ -263,6 +266,8 @@
 			
 		}else{
 			macchine[i].position.x -=0.9;
+			albero.position.x -=0.3;
+			albero2.position.x -=0.3;
 			
 		}
 		}
