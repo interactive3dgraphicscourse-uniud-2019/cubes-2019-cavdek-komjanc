@@ -30,13 +30,16 @@
 		<script>
 
 		var scene, camera, renderer, controls, stats;
-		var xSpeed = 0.4;
-		var ySpeed = 0.4;
+		var xSpeed = 0.8;
+		var ySpeed = 0.8;
 		var collision=false;
 		var testo2;
 		var macchine= new Array(10);
 		var crash=false;
-
+		var counter;
+		var a,j;
+		var test1;
+		var startTime, endTime;
 
 
 	/*	var macchina_completa;
@@ -67,7 +70,10 @@
 		//var loader = new THREE.OBJLoader();
 
 		function Start() {
-
+			j=0;
+			a=65;
+			test1=true;
+			counter=0;
 			scene = new THREE.Scene();
 			camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -80,7 +86,7 @@
 			renderer.shadowMap.enabled = true;
 			document.body.appendChild( renderer.domElement );
 
-			camera.position.set(-15,4,5);
+			camera.position.set(-20,5,0);
 			camera.lookAt( new THREE.Vector3(0,0,0));
 
 			var geometry = new THREE.BoxGeometry(1,1,1);
@@ -128,23 +134,23 @@
 			controls = new THREE.OrbitControls( camera );
 			//controls.addEventListener( 'change', Render );
 
-			for (var i=0;i<10;i++){
+			/*for (var i=0;i<10;i++){
 				macchine[i]=creaMacchinaCompleta();
 				scene.add(macchine[i]);
 				macchine[i].position.set(getRandomInt(450,50),0,getRandomInt(10,-10));
 				//macchine[i].rotation.y=Math.PI;
 			}
-
+*/
 			macchinaCompleta=creaMacchinaCompleta();
 			//let macchinaCompleta=macchinaCompletaGeometry.getMacchinaCompleta();
 			scene.add(macchinaCompleta);
-			macchinaCompleta.position.set(0,0,5);
+			macchinaCompleta.position.set(-5,0,0);
 
 			albero = creaAlbero();
 			scene.add(albero);
 			albero.position.set(100,4,-10);
 			albero2 = creaAlbero();
-			scene.add(albero2);
+		//	scene.add(albero2);
 			albero2.position.set(169,4,10);
 
 			var fontLoader = new THREE.FontLoader();
@@ -152,13 +158,14 @@
 
 			var testo = new THREE.TextGeometry( 'GAME OVER', {
 				font: font,
-				size: 10,
-				height: 5,
+				size: 15,
+				height: 1,
 				curveSegments: 6,
 			} );
+			
 
 			var colore2=new THREE.Color();
-			colore2.setRGB(255,250,250);
+			colore2.setRGB(0,0,250);
 			var textMaterial= new THREE.MeshBasicMaterial({ color: colore2 });
     		testo2 = new THREE.Mesh(testo , textMaterial);
 			scene.add(testo2);
@@ -227,6 +234,19 @@
 			//scene.add(macchina_completa);
 
 		}
+		function spawnMacchine(variabile){
+			console.log("insidee");
+			
+			if(variabile %a===0){
+				if(a!=8){
+				a--;
+				}
+				macchine[j]=creaMacchinaCompleta();
+				scene.add(macchine[j]);
+			    macchine[j].position.set(getRandomInt(550,250),0,getRandomInt(15,-15));
+				j++;
+			}
+		}
 		function detectCollisionCubes(object1, object2){
 			object1.geometry.computeBoundingBox(); //not needed if its already calculated
   			object2.geometry.computeBoundingBox();
@@ -241,22 +261,41 @@
 
 			return box1.intersectsBox(box2);
 		}
+		function crashed(){
+			if(test1==true){
+			camera.rotation.y=Math.PI+0.5;
+			//camera.rotation.x=0.2;
+			testo2.position.x=-15;
+			testo2.rotation.x=0.1;
+			testo2.rotation.z=0.1;
+			testo2.translateZ(-50);
+			testo2.translateX(-40);
+			test1=false;
+		}
+		}
+	
+
+		
 
 		function Update() {
-			//console.log("HIT");
+			
+			counter++;
+		
+			spawnMacchine(counter);
+			//console.log(counter);
 
 
 
-		for (var i=0;i<10;i++){
+		for (var i=0;i<j;i++){
 		if(detectCollisionCubes(macchinaCompleta,macchine[i])==true){
+
+
 			console.log("HIT");
 			macchine[i].position.x=-1500;
-			crash=true;
+			crashed();
+			
 
-
-			testo2.position.y=5;
-					testo2.translateZ(-50);
-					testo2.translateX(-40);
+			
 
 		/*	for(i=0;i<100;i++){
 			macchinaCompleta.rotation.z=Math(PI*i);
@@ -264,10 +303,14 @@
 		*/
 
 		}else{
-			macchine[i].position.x -=0.9;
+			macchine[i].position.x -=2.0;
 			albero.position.x -=0.3;
 			albero2.position.x -=0.3;
 
+		}
+		if(macchine[i].position.x<-20){
+			macchine[i].position.x=-1500;
+			//removeEntity(macchine[i]);
 		}
 		}
 				//if(crash==true){
@@ -286,6 +329,9 @@
 		function getRandomInt(max,min) {
 			var a;
 			a=Math.floor(Math.random() * Math.floor(max));
+			if(Math.random()<=0.5){
+				a=-a
+			}
 			if (a<min){
 			}else{
  		 return a
@@ -302,16 +348,12 @@
 
 		function onDocumentKeyDown(event) { //WASD to move
 		var keyCode = event.which;
-		if (keyCode == 87) {
-			macchinaCompleta.position.x += ySpeed;
-		} else if (keyCode == 83) {
-			macchinaCompleta.position.x -= ySpeed;
-		} else if (keyCode == 65) {
+		if (keyCode == 65) {
 			macchinaCompleta.position.z -= xSpeed;
+			camera.position.z-=xSpeed;
 		} else if (keyCode == 68) {
 			macchinaCompleta.position.z += xSpeed;
-		} else if (keyCode == 32) {
-			macchinaCompleta.position.set(0, 0, 0);
+			camera.position.z+=xSpeed;
 		}
 
 		};
