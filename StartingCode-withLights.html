@@ -33,6 +33,9 @@
 		var ySpeed = 0.4;
 		var collision=false;
 		var testo2;
+		var macchine= new Array(10);
+		var crash=false;
+		
 
 		
 	/*	var macchina_completa;
@@ -61,7 +64,7 @@
 		var colore;
 		*/
 		//var loader = new THREE.OBJLoader();
-
+		
 		function Start() {
 
 			scene = new THREE.Scene();
@@ -76,7 +79,7 @@
 			renderer.shadowMap.enabled = true;
 			document.body.appendChild( renderer.domElement );
 
-			camera.position.set(-15,4,0);
+			camera.position.set(-15,4,5);
 			camera.lookAt( new THREE.Vector3(0,0,0));
 
 			var geometry = new THREE.BoxGeometry(1,1,1);
@@ -124,11 +127,17 @@
 
 			controls = new THREE.OrbitControls( camera );
 			//controls.addEventListener( 'change', Render );
-
+			
+			for (var i=0;i<10;i++){
+				macchine[i]=creaMacchinaCompleta();
+				scene.add(macchine[i]);
+				macchine[i].position.set(getRandomInt(450,50),0,getRandomInt(10,-10));
+				//macchine[i].rotation.y=Math.PI;
+			}		
 			macchinaCompleta=creaMacchinaCompleta();
 			//let macchinaCompleta=macchinaCompletaGeometry.getMacchinaCompleta();
 			scene.add(macchinaCompleta);
-			macchinaCompleta.position.set(0,0,0);
+			macchinaCompleta.position.set(0,0,5);
 
 			albero = creaAlbero();
 			scene.add(albero);
@@ -236,13 +245,16 @@
 			
 			
 			
-			
-		if(detectCollisionCubes(macchinaCompleta,albero)==true){
+		for (var i=0;i<10;i++){
+		if(detectCollisionCubes(macchinaCompleta,macchine[i])==true){
 			console.log("HIT");
-			albero.position.x=-1500;
+			macchine[i].position.x=-1500;
+			crash=true;
+			
+			
 			testo2.position.y=5;
-			testo2.translateZ(-50);
-			testo2.translateX(-40);
+					testo2.translateZ(-50);
+					testo2.translateX(-40);
 			
 		/*	for(i=0;i<100;i++){
 			macchinaCompleta.rotation.z=Math(PI*i);
@@ -250,9 +262,14 @@
 		*/	
 			
 		}else{
-			albero.position.x -=0.9;
+			macchine[i].position.x -=0.9;
 			
 		}
+		}
+				//if(crash==true){
+					
+
+			//	}
 				requestAnimationFrame( Update );
 				//controls.update();
 				stats.update();
@@ -260,6 +277,15 @@
 				Render();
 		
 			
+		}
+		//}
+		function getRandomInt(max,min) {
+			var a;
+			a=Math.floor(Math.random() * Math.floor(max));
+			if (a<min){
+			}else{
+ 		 return a 
+			}
 		}
 
 		function Render() {
