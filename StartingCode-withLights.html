@@ -29,6 +29,12 @@
 		<script>
 
 		var scene, camera, renderer, controls, stats;
+		var xSpeed = 0.4;
+		var ySpeed = 0.4;
+		var collision=false;
+		var testo2;
+
+		
 	/*	var macchina_completa;
 		var ruota;
 		var ruotaGeometry;
@@ -70,7 +76,7 @@
 			renderer.shadowMap.enabled = true;
 			document.body.appendChild( renderer.domElement );
 
-			camera.position.set(2,2,2);
+			camera.position.set(-15,4,0);
 			camera.lookAt( new THREE.Vector3(0,0,0));
 
 			var geometry = new THREE.BoxGeometry(1,1,1);
@@ -117,18 +123,38 @@
 			Coordinates.drawAllAxes();
 
 			controls = new THREE.OrbitControls( camera );
-			controls.addEventListener( 'change', Render );
+			//controls.addEventListener( 'change', Render );
 
 			macchinaCompleta=creaMacchinaCompleta();
 			//let macchinaCompleta=macchinaCompletaGeometry.getMacchinaCompleta();
 			scene.add(macchinaCompleta);
-			macchinaCompleta.position.set(-15,0,0);
+			macchinaCompleta.position.set(0,0,0);
 
 			albero = creaAlbero();
 			scene.add(albero);
-			albero.position.set(-7,0,7);
+			albero.position.set(100,4,1);
 
+			var fontLoader = new THREE.FontLoader();
+			fontLoader.load( 'fonts/helvetiker_bold.typeface.json', function ( font ) {
 
+			var testo = new THREE.TextGeometry( 'GAME OVER', {
+				font: font,
+				size: 10,
+				height: 5,
+				curveSegments: 6,
+			} );
+			
+			var colore2=new THREE.Color();
+			colore2.setRGB(255,250,250);
+			var textMaterial= new THREE.MeshBasicMaterial({ color: colore2 });
+    		testo2 = new THREE.Mesh(testo , textMaterial);
+			scene.add(testo2);
+			testo2.position.set(0,100,0);
+			testo2.rotation.y=Math.PI/(2/3);
+			
+			
+		} );
+			
 
 
 		/*	//inizio here
@@ -190,13 +216,50 @@
 			//scene.add(macchina_completa);
 
 		}
+		function detectCollisionCubes(object1, object2){
+			object1.geometry.computeBoundingBox(); //not needed if its already calculated
+  			object2.geometry.computeBoundingBox();
+  			object1.updateMatrixWorld();
+  			object2.updateMatrixWorld();
+  
+  			var box1 = object1.geometry.boundingBox.clone();
+  			box1.applyMatrix4(object1.matrixWorld);
 
+  			var box2 = object2.geometry.boundingBox.clone();
+			box2.applyMatrix4(object2.matrixWorld);
+			  
+			return box1.intersectsBox(box2);
+		}
+		
 		function Update() {
-			macchinaCompleta.position.x +=0.5;
-			requestAnimationFrame( Update );
-			controls.update();
-			stats.update();
-			Render();
+			//console.log("HIT");
+			
+			
+			
+			
+		if(detectCollisionCubes(macchinaCompleta,albero)==true){
+			console.log("HIT");
+			albero.position.x=-1500;
+			testo2.position.y=5;
+			testo2.translateZ(-50);
+			testo2.translateX(-40);
+			
+		/*	for(i=0;i<100;i++){
+			macchinaCompleta.rotation.z=Math(PI*i);
+			setTimeout(0.01);
+		*/	
+			
+		}else{
+			albero.position.x -=0.9;
+			
+		}
+				requestAnimationFrame( Update );
+				//controls.update();
+				stats.update();
+				
+				Render();
+		
+			
 		}
 
 		function Render() {
@@ -204,8 +267,29 @@
 			renderer.render(scene, camera);
 		}
 
+		
+		document.addEventListener("keydown", onDocumentKeyDown, false);
+		
+		function onDocumentKeyDown(event) { //WASD to move
+		var keyCode = event.which;
+		if (keyCode == 87) {
+			macchinaCompleta.position.x += ySpeed;
+		} else if (keyCode == 83) {
+			macchinaCompleta.position.x -= ySpeed;
+		} else if (keyCode == 65) {
+			macchinaCompleta.position.z -= xSpeed;
+		} else if (keyCode == 68) {
+			macchinaCompleta.position.z += xSpeed;
+		} else if (keyCode == 32) {
+			macchinaCompleta.position.set(0, 0, 0);
+		}
+		
+		};
+
 		Start();
 		Update();
+		
+		
 
 		</script>
 	</body>
