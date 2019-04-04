@@ -20,7 +20,7 @@ function creaMacchinaCompleta(){
 		var retroMaterial;
 		var alettone;
 		var alettoneGeometry;
-		var alettoneMaterial;		
+		var alettoneMaterial;
 		var tetto;
 		var tettoGeometry;
 		var tettoMaterial;
@@ -82,8 +82,8 @@ function creaMacchinaCompleta(){
 			corpo.add(alettone);
 			corpo.add(retro);
 			corpo.add(alaAnteriore);
-			
-			
+
+
 
             //corpo.add(corpo);
 

@@ -22,6 +22,7 @@
 		<script src="lib/OrbitControls.js"></script>
 		<script src="models/macchina_completa.js"></script>
 		<script src="models/albero.js"></script>
+		<script src="models/strada.js"></script>
 
 	</head>
 	<body>
@@ -35,9 +36,9 @@
 		var testo2;
 		var macchine= new Array(10);
 		var crash=false;
-		
 
-		
+
+
 	/*	var macchina_completa;
 		var ruota;
 		var ruotaGeometry;
@@ -64,7 +65,7 @@
 		var colore;
 		*/
 		//var loader = new THREE.OBJLoader();
-		
+
 		function Start() {
 
 			scene = new THREE.Scene();
@@ -121,19 +122,19 @@
 			stats.domElement.style.position = 'absolute';
 			stats.domElement.style.top = '0px';
 			document.body.appendChild( stats.domElement );
-
 			// uncomment if you need to draw coordinate axes when building the scene
 			//Coordinates.drawAllAxes();
 
 			controls = new THREE.OrbitControls( camera );
 			//controls.addEventListener( 'change', Render );
-			
+
 			for (var i=0;i<10;i++){
 				macchine[i]=creaMacchinaCompleta();
 				scene.add(macchine[i]);
 				macchine[i].position.set(getRandomInt(450,50),0,getRandomInt(10,-10));
 				//macchine[i].rotation.y=Math.PI;
-			}		
+			}
+
 			macchinaCompleta=creaMacchinaCompleta();
 			//let macchinaCompleta=macchinaCompletaGeometry.getMacchinaCompleta();
 			scene.add(macchinaCompleta);
@@ -155,7 +156,7 @@
 				height: 5,
 				curveSegments: 6,
 			} );
-			
+
 			var colore2=new THREE.Color();
 			colore2.setRGB(255,250,250);
 			var textMaterial= new THREE.MeshBasicMaterial({ color: colore2 });
@@ -163,10 +164,8 @@
 			scene.add(testo2);
 			testo2.position.set(0,100,0);
 			testo2.rotation.y=Math.PI/(2/3);
-			
-			
 		} );
-			
+
 
 
 		/*	//inizio here
@@ -233,55 +232,55 @@
   			object2.geometry.computeBoundingBox();
   			object1.updateMatrixWorld();
   			object2.updateMatrixWorld();
-  
+
   			var box1 = object1.geometry.boundingBox.clone();
   			box1.applyMatrix4(object1.matrixWorld);
 
   			var box2 = object2.geometry.boundingBox.clone();
 			box2.applyMatrix4(object2.matrixWorld);
-			  
+
 			return box1.intersectsBox(box2);
 		}
-		
+
 		function Update() {
 			//console.log("HIT");
-			
-			
-			
+
+
+
 		for (var i=0;i<10;i++){
 		if(detectCollisionCubes(macchinaCompleta,macchine[i])==true){
 			console.log("HIT");
 			macchine[i].position.x=-1500;
 			crash=true;
-			
-			
+
+
 			testo2.position.y=5;
 					testo2.translateZ(-50);
 					testo2.translateX(-40);
-			
+
 		/*	for(i=0;i<100;i++){
 			macchinaCompleta.rotation.z=Math(PI*i);
 			setTimeout(0.01);
-		*/	
-			
+		*/
+
 		}else{
 			macchine[i].position.x -=0.9;
 			albero.position.x -=0.3;
 			albero2.position.x -=0.3;
-			
+
 		}
 		}
 				//if(crash==true){
-					
+
 
 			//	}
 				requestAnimationFrame( Update );
 				//controls.update();
 				stats.update();
-				
+
 				Render();
-		
-			
+
+
 		}
 		//}
 		function getRandomInt(max,min) {
@@ -289,7 +288,7 @@
 			a=Math.floor(Math.random() * Math.floor(max));
 			if (a<min){
 			}else{
- 		 return a 
+ 		 return a
 			}
 		}
 
@@ -298,9 +297,9 @@
 			renderer.render(scene, camera);
 		}
 
-		
+
 		document.addEventListener("keydown", onDocumentKeyDown, false);
-		
+
 		function onDocumentKeyDown(event) { //WASD to move
 		var keyCode = event.which;
 		if (keyCode == 87) {
@@ -314,13 +313,13 @@
 		} else if (keyCode == 32) {
 			macchinaCompleta.position.set(0, 0, 0);
 		}
-		
+
 		};
 
 		Start();
 		Update();
-		
-		
+
+
 
 		</script>
 	</body>
