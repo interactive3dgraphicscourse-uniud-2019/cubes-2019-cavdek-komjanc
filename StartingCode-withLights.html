@@ -75,7 +75,6 @@
 
 			var geometry = new THREE.BoxGeometry(1,1,1);
 			var texture = THREE.ImageUtils.loadTexture('textures/11635.jpg');
-			var trunk = THREE.ImageUtils.loadTexture('textures/trunk_texture.jpg');
 			var material = new THREE.MeshPhongMaterial( { map: texture } );
 			var cube = new THREE.Mesh( geometry, material );
 			cube.castShadow = true;
