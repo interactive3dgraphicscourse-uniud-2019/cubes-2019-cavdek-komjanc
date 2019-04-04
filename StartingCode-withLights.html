@@ -20,13 +20,15 @@
 		<script src="lib/stats.min.js"></script>
 		<script src="lib/Coordinates.js"></script>
 		<script src="lib/OrbitControls.js"></script>
+		<script src="models/macchina_completa.js"></script>
+		
 	</head>
 	<body>
-		
+	
 		<script>
 		
 		var scene, camera, renderer, controls, stats;
-		var macchina_completa;
+	/*	var macchina_completa;
 		var ruota;
 		var ruotaGeometry;
 		var ruotaMaterial;
@@ -50,8 +52,11 @@
 		var tettoMaterial;
 
 		var colore;
+		*/
+		//var loader = new THREE.OBJLoader();
 		
 		function Start() {
+
 			scene = new THREE.Scene();
 			camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -113,8 +118,14 @@
 			controls = new THREE.OrbitControls( camera );
 			controls.addEventListener( 'change', Render );
 
+			macchinaCompleta=creaMacchinaCompleta();
+			//let macchinaCompleta=macchinaCompletaGeometry.getMacchinaCompleta();
+			scene.add(macchinaCompleta);
+			macchinaCompleta.position.set(-15,0,0);
+	
 
-			//inizio here
+
+		/*	//inizio here
 
 			macchina_completa = new THREE.Object3D();
 
@@ -168,12 +179,14 @@
 			macchina_completa.add(alaAnteriore);
 			macchina_completa.add(muso);
 			macchina_completa.add(corpo);
-			scene.add(macchina_completa);
+			macchina_completa.position.set(-50,0,0)
+			*/
+			//scene.add(macchina_completa);
 			
 		}
 		
 		function Update() {
-			macchina_completa.position.x +=0.2;
+			macchinaCompleta.position.x +=0.5;
 			requestAnimationFrame( Update );
 			controls.update();  
 			stats.update();
