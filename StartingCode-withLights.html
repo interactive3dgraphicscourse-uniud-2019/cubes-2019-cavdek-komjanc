@@ -61,34 +61,6 @@
 		var startTime, endTime;
 		var objects = [];
 
-
-		/*	var macchina_completa;
-			var ruota;
-			var ruotaGeometry;
-			var ruotaMaterial;
-			var muso;
-			var musoGeometry;
-			var musoMaterial;
-			var corpo;
-			var corpoGeometry;
-			var corpoMaterial;
-			var alaAnteriore;
-			var alaAnterioreGeometry;
-			var alaAnterioreMaterial;
-			var retro;
-			var retroGeometry;
-			var retroMaterial;
-			var alettone;
-			var alettoneGeometry;
-			var alettoneMaterial;
-			var tetto;
-			var tettoGeometry;
-			var tettoMaterial;
-
-			var colore;
-			*/
-		//var loader = new THREE.OBJLoader();
-
 		function Start() {
 			j = 0;
 			a = 60;
@@ -113,17 +85,6 @@
 			camera.position.set(-20, 5, 0);
 			camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-			var geometry = new THREE.BoxGeometry(1, 1, 1);
-			var texture = THREE.ImageUtils.loadTexture('textures/11635.jpg');
-			var material = new THREE.MeshPhongMaterial({
-				map: texture
-			});
-			var cube = new THREE.Mesh(geometry, material);
-			cube.castShadow = true;
-			cube.receiveShadow = true;
-
-			//scene.add( cube );
-
 			hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
 			hemiLight.color.setHSL(0.6, 1, 0.6);
 			hemiLight.groundColor.setHSL(0.095, 1, 0.75);
@@ -139,49 +100,16 @@
 			dirLight.shadow.mapSize.width = 1024;
 			dirLight.shadow.mapSize.height = 1024;
 
-
-			// GROUND
-
-			var groundGeo = new THREE.PlaneBufferGeometry(10000, 10000);
-			var groundMat = new THREE.MeshPhongMaterial({
-				color: 0xffffff,
-				specular: 0x050505
-			});
-			groundMat.color.setHSL(0.095, 1, 0.75);
-			var ground = new THREE.Mesh(groundGeo, groundMat);
-			ground.position.y = -0.5;
-			ground.rotation.x = -Math.PI / 2;
-			//scene.add( ground );
-			ground.receiveShadow = true;
-
 			stats = new Stats();
 			stats.domElement.style.position = 'absolute';
 			stats.domElement.style.top = '0px';
 			document.body.appendChild(stats.domElement);
-			// uncomment if you need to draw coordinate axes when building the scene
-			//Coordinates.drawAllAxes();
 
 			controls = new THREE.OrbitControls(camera);
-			//controls.addEventListener( 'change', Render );
-
-			/*for (var i=0;i<10;i++){
-				macchine[i]=creaMacchinaCompleta();
-				scene.add(macchine[i]);
-				macchine[i].position.set(getRandomInt(450,50),0,getRandomInt(10,-10));
-				//macchine[i].rotation.y=Math.PI;
-			}
-*/
+			
 			macchinaCompleta = creaMacchinaCompleta();
-			//let macchinaCompleta=macchinaCompletaGeometry.getMacchinaCompleta();
 			scene.add(macchinaCompleta);
 			macchinaCompleta.position.set(-5, 0.4, 0);
-
-			/*albero = creaAlbero();
-			scene.add(albero);
-			albero.position.set(100, 4, 15);
-			/*albero2 = creaAlbero();
-			//	scene.add(albero2);
-			albero2.position.set(169, 4, 10);*/
 
 			guardRailDx = creaGuardRail();
 			scene.add(guardRailDx);
@@ -218,65 +146,6 @@
 				testo2.translateX(-60);
 			});
 
-
-
-			/*	//inizio here
-
-				macchina_completa = new THREE.Object3D();
-
-				colore=(Math.random()*0xffffff);
-
-				corpoGeometry = new THREE.BoxGeometry(4,1,2);
-				corpoMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
-				corpo=new THREE.Mesh(corpoGeometry,corpoMaterial);
-				corpo.position.set(-1,0,0);
-
-				musoGeometry = new THREE.BoxGeometry(3,1,1);
-				musoMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
-				muso=new THREE.Mesh(musoGeometry,musoMaterial);
-				//muso.add(tetto);
-				muso.position.set(2.5,0,0);
-
-				alaAnterioreGeometry=new THREE.BoxGeometry(1,1,3);
-				alaAnterioreMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
-				alaAnteriore=new THREE.Mesh(alaAnterioreGeometry,alaAnterioreMaterial);
-				alaAnteriore.position.set(4.5,0,0);
-
-				retroGeometry=new THREE.BoxGeometry(3,1,1);
-				retroMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
-				retro=new THREE.Mesh(retroGeometry,retroMaterial);
-				retro.position.set(-4.5,0,0);
-
-				tettoGeometry=new THREE.BoxGeometry(3,1,1)
-				tettoMaterial = new THREE.MeshBasicMaterial({ color: colore, side: THREE.DoubleSide } );
-				tetto=new THREE.Mesh(tettoGeometry,tettoMaterial);
-				tetto.position.set(-2,1,0);
-
-				alettone=new THREE.Mesh(alaAnterioreGeometry,alaAnterioreMaterial); //alettone=ala anteriore
-				alettone.position.set(-5.5,1,0);
-
-				ruotaGeometry=new THREE.BoxGeometry(1,1,1);
-				ruotaMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide } );
-				ruota=[];
-				for (i=0; i<4; i++){
-					ruota[i] = new THREE.Mesh(ruotaGeometry,ruotaMaterial);
-					macchina_completa.add(ruota[i]);
-				}
-				ruota[0].position.set(2.5,0,1);
-				ruota[1].position.set(2.5,0,-1);
-				ruota[2].position.set(-4,0,1);
-				ruota[3].position.set(-4,0,-1);
-
-
-				macchina_completa.add(tetto);
-				macchina_completa.add(alettone);
-				macchina_completa.add(retro);
-				macchina_completa.add(alaAnteriore);
-				macchina_completa.add(muso);
-				macchina_completa.add(corpo);
-				macchina_completa.position.set(-50,0,0)
-				*/
-			//scene.add(macchina_completa);
 			setGround();
 		}
 
@@ -306,16 +175,6 @@
 				alberi[k].position.set(150,3,getRandomInt(30,15));
 				k++;
 			}
-			/*for (var i = 0; i < -1; i++) {
-				if (i % 10 === 0) {
-					console.log("Dentro if");
-					alberi[i] = creaAlbero();
-					scene.add(alberi[i]);
-					alberi[i].position.set(i, 4, 15);
-				} else {
-					console.log("Dentro else");
-				}
-			}*/
 		}
 
 		function detectCollisionCubes(object1, object2) {
@@ -335,16 +194,7 @@
 
 		function crashed(counter) {
 			if (test1 == true) {
-				//camera.rotation.y=Math.PI+0.5;
 				camera.position.y = 100;
-				//camera.rotation.x=0.2;
-				/*
-				testo2.position.x=-15;
-				testo2.rotation.x=0.1;
-				testo2.rotation.z=0.1;
-				testo2.translateZ(-50);
-				testo2.translateX(-40);
-				*/
 				document.querySelector('.score').innerHTML = counter;
 				test1 = false;
 			}
@@ -359,7 +209,6 @@
 			document.querySelector('.time').innerHTML = counter;
 
 			spawnMacchine(counter);
-			//console.log(counter);
 
 			spawnAlberi(counter);
 
@@ -375,25 +224,19 @@
 					crashed(counter);
 
 				} else {
-					macchine[i].position.x -= 4;
-				//	albero[i].position.x -= 0.3;
-					//albero2.position.x -= 0.3;*/
-					//alberi[i].position.x -= 0.3;
-
+					macchine[i].position.x -= 4;			
 				}
 				if (macchine[i].position.x < -20) {
 					macchine[i].position.x = -1500;
-					//removeEntity(macchine[i]);
 				}
 			}
 
 			for(var i = 0; i < k; i++) {
 				alberi[i].position.x -= 6;
 			}
-			//if(crash==true){
+		
 
-
-			//	}
+		
 			requestAnimationFrame(Update);
 			//controls.update();
 			stats.update();
@@ -402,7 +245,7 @@
 
 
 		}
-		//}
+		
 		function getRandomInt(max, min) {
 			var a;
 			a = Math.floor(Math.random() * Math.floor(max));
