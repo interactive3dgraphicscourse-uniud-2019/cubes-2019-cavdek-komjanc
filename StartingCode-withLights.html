@@ -40,6 +40,7 @@
 		var a,j;
 		var test1;
 		var startTime, endTime;
+		var objects = [];
 
 
 	/*	var macchina_completa;
@@ -71,7 +72,7 @@
 
 		function Start() {
 			j=0;
-			a=65;
+			a=60;
 			test1=true;
 			counter=0;
 			scene = new THREE.Scene();
@@ -115,13 +116,14 @@
 
 
 			// GROUND
+			
 			var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
 			var groundMat = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x050505 } );
 			groundMat.color.setHSL( 0.095, 1, 0.75 );
 			var ground = new THREE.Mesh( groundGeo, groundMat );
 			ground.position.y = -0.5;
 			ground.rotation.x = -Math.PI/2;
-			scene.add( ground );
+			//scene.add( ground );
 			ground.receiveShadow = true;
 
 			stats = new Stats();
@@ -148,7 +150,7 @@
 
 			albero = creaAlbero();
 			scene.add(albero);
-			albero.position.set(100,4,-10);
+			albero.position.set(100,4,15);
 			albero2 = creaAlbero();
 		//	scene.add(albero2);
 			albero2.position.set(169,4,10);
@@ -232,7 +234,7 @@
 			macchina_completa.position.set(-50,0,0)
 			*/
 			//scene.add(macchina_completa);
-
+			setGround();
 		}
 		function spawnMacchine(variabile){
 			console.log("insidee");
@@ -243,7 +245,7 @@
 				}
 				macchine[j]=creaMacchinaCompleta();
 				scene.add(macchine[j]);
-			    macchine[j].position.set(getRandomInt(550,250),0,getRandomInt(15,-15));
+			    macchine[j].position.set(getRandomInt(200,50),0,getRandomInt(10,-5));
 				j++;
 			}
 		}
@@ -285,7 +287,8 @@
 			//console.log(counter);
 
 
-
+			if(macchinaCompleta.position.z>=9||macchinaCompleta.position.z<=-5){crashed();
+			}
 		for (var i=0;i<j;i++){
 		if(detectCollisionCubes(macchinaCompleta,macchine[i])==true){
 
@@ -293,17 +296,9 @@
 			console.log("HIT");
 			macchine[i].position.x=-1500;
 			crashed();
-			
-
-			
-
-		/*	for(i=0;i<100;i++){
-			macchinaCompleta.rotation.z=Math(PI*i);
-			setTimeout(0.01);
-		*/
 
 		}else{
-			macchine[i].position.x -=2.0;
+			macchine[i].position.x -=4;
 			albero.position.x -=0.3;
 			albero2.position.x -=0.3;
 
@@ -336,6 +331,69 @@
 			}else{
  		 return a
 			}
+		}
+
+		function getHeightData(img,scale) {
+  
+  			if (scale == undefined) scale=1;
+
+			var canvas = document.createElement( 'canvas' );
+			canvas.width = img.width;
+			canvas.height = img.height;
+			var context = canvas.getContext( '2d' );
+
+			var size = img.width * img.height;
+			console.log(size);
+			var data = new Float32Array( size );
+
+			context.drawImage(img,0,0);
+
+			for ( var i = 0; i < size; i ++ ) {
+				data[i] = 0
+			}
+
+			var imgd = context.getImageData(0, 0, img.width, img.height);
+			var pix = imgd.data;
+
+			var j=0;
+			for (var i = 0; i<pix.length; i +=4) {
+				var all = pix[i]+pix[i+1]+pix[i+2];  // all is in range 0 - 255*3
+				data[j++] = scale*all/3;   
+			}
+
+	 return data;
+ 		}
+		 function setGround() {
+				terrain = new THREE.Object3D();
+				img = new Image();
+				img.src = "textures/heightmap.png";
+				img.onload = function () {
+					var data = getHeightData(img,0.1);
+					let count = 0;
+					var boxGeometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+					let boxMountainTex=new THREE.TextureLoader().load('textures/11635.jpg');
+					let boxMountainMat=  new THREE.MeshBasicMaterial( { map: boxMountainTex } );
+					let boxMountain = new THREE.Mesh( boxGeometry, boxMountainMat);
+					for (var i = 0; i < img.width; i++) {
+						for (var j = 0; j < img.height; j++) {
+							
+							let object=boxMountain.clone();
+							object.position.x = ( i - img.width / 2 );
+							object.position.z = ( j - img.height / 2 );
+							object.position.y = data[count] * 1;
+							
+							count++;
+							
+							objects.push(object);
+							terrain.add(object);
+						}
+					}
+
+					scene.add(terrain);
+					terrain.position.y=-0.8;
+					terrain.position.x=30;
+					terrain.rotation.y=Math.PI;
+				}
 		}
 
 		function Render() {
