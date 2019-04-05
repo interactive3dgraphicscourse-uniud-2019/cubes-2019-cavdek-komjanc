@@ -1,0 +1,9 @@
+Known bugs:
+l'animazione parte 1 secondo in ritardo
+le collisioni avvengono solo se collidono i due centri di 2 macchine
+avvolte spawnano 2 macchine sovrapposte
+
+Improvements:
+aggiungere terreno, alberi, guard rail, spalti ecc
+aggiungere uno scoreboard
+migliorare la schermata GAME OVER
