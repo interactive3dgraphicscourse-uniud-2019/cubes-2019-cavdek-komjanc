@@ -26,6 +26,20 @@
 
 	</head>
 	<body>
+			<div id="blocker">
+					<div id="instructions">
+						<span style="font-size:40px">
+								<br />								    	 
+										  Time:<div class="time"></div>
+										  Score:
+										  <div class="score"></div>
+										  <div class="instructions">
+										  A-D = Move, MOUSE = Look around)
+											</div>
+						
+					</div>
+				</div>
+			
 
 		<script>
 
@@ -263,7 +277,7 @@
 
 			return box1.intersectsBox(box2);
 		}
-		function crashed(){
+		function crashed(counter){
 			if(test1==true){
 			camera.rotation.y=Math.PI+0.5;
 			//camera.rotation.x=0.2;
@@ -272,6 +286,7 @@
 			testo2.rotation.z=0.1;
 			testo2.translateZ(-50);
 			testo2.translateX(-40);
+			document.querySelector('.score').innerHTML = counter;
 			test1=false;
 		}
 		}
@@ -282,12 +297,12 @@
 		function Update() {
 			
 			counter++;
-		
+			document.querySelector('.time').innerHTML = counter;
 			spawnMacchine(counter);
 			//console.log(counter);
 
 
-			if(macchinaCompleta.position.z>=9||macchinaCompleta.position.z<=-5){crashed();
+			if(macchinaCompleta.position.z>=9||macchinaCompleta.position.z<=-5){crashed(counter);
 			}
 		for (var i=0;i<j;i++){
 		if(detectCollisionCubes(macchinaCompleta,macchine[i])==true){
@@ -295,7 +310,7 @@
 
 			console.log("HIT");
 			macchine[i].position.x=-1500;
-			crashed();
+			crashed(counter);
 
 		}else{
 			macchine[i].position.x -=4;
@@ -422,5 +437,6 @@
 
 
 		</script>
+		
 	</body>
 </html>
