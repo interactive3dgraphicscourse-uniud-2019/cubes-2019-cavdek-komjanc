@@ -102,7 +102,7 @@
 			renderer.shadowMap.enabled = true;
 			document.body.appendChild( renderer.domElement );
 
-			camera.position.set(-20,5,0);
+			camera.position.set(-20,6,0);
 			camera.lookAt( new THREE.Vector3(0,0,0));
 
 			var geometry = new THREE.BoxGeometry(1,1,1);
@@ -161,7 +161,7 @@
 			macchinaCompleta=creaMacchinaCompleta();
 			//let macchinaCompleta=macchinaCompletaGeometry.getMacchinaCompleta();
 			scene.add(macchinaCompleta);
-			macchinaCompleta.position.set(-5,0,0);
+			macchinaCompleta.position.set(-5,0.4,0);
 
 			albero = creaAlbero();
 			scene.add(albero);
@@ -177,6 +177,10 @@
 			guardRailSx=creaGuardRail();
 			scene.add(guardRailSx);
 			guardRailSx.position.set(30,0.8,-6.8);
+
+			strada=creaStrada();
+			scene.add(strada);
+			strada.position.set(25,0.01,2)
 
 			var fontLoader = new THREE.FontLoader();
 			fontLoader.load( 'fonts/helvetiker_bold.typeface.json', function ( font ) {
@@ -269,7 +273,7 @@
 				}
 				macchine[j]=creaMacchinaCompleta();
 				scene.add(macchine[j]);
-			    macchine[j].position.set(getRandomInt(200,50),0,getRandomInt(10,-5));
+			    macchine[j].position.set(getRandomInt(200,50),0.4,getRandomInt(10,-5));
 				j++;
 			}
 		}
