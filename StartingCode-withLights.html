@@ -52,11 +52,11 @@
 		var ySpeed = 0.8;
 		var collision = false;
 		var testo2;
-		var macchine = new Array(10);
-		var alberi = new Array(1000000);
+		var macchine = [];
+		var alberi = [];
 		var crash = false;
 		var counter;
-		var a, j;
+		var a,b,j,k;
 		var test1;
 		var startTime, endTime;
 		var objects = [];
@@ -92,6 +92,8 @@
 		function Start() {
 			j = 0;
 			a = 60;
+			b=60;
+			k=0;
 			test1 = true;
 			counter = 0;
 			scene = new THREE.Scene();
@@ -172,7 +174,7 @@
 			macchinaCompleta = creaMacchinaCompleta();
 			//let macchinaCompleta=macchinaCompletaGeometry.getMacchinaCompleta();
 			scene.add(macchinaCompleta);
-			macchinaCompleta.position.set(-5, 0, 0);
+			macchinaCompleta.position.set(-5, 0.4, 0);
 
 			/*albero = creaAlbero();
 			scene.add(albero);
@@ -183,15 +185,15 @@
 
 			guardRailDx = creaGuardRail();
 			scene.add(guardRailDx);
-			guardRailDx.position.set(30, 0.8, 10.8);
+			guardRailDx.position.set(35, 0.8, 10.8);
 
 			guardRailSx = creaGuardRail();
 			scene.add(guardRailSx);
-			guardRailSx.position.set(30, 0.8, -6.8);
+			guardRailSx.position.set(35, 0.8, -6.8);
 
 			strada=creaStrada();
 			scene.add(strada);
-			strada.position.set(25,0.01,2)
+			strada.position.set(45,0.01,2)
 
 			var fontLoader = new THREE.FontLoader();
 			fontLoader.load('fonts/helvetiker_bold.typeface.json', function(font) {
@@ -287,7 +289,7 @@
 				}
 				macchine[j] = creaMacchinaCompleta();
 				scene.add(macchine[j]);
-				macchine[j].position.set(getRandomInt(200, 50), 0, getRandomInt(10, -5));
+				macchine[j].position.set(getRandomInt(200, 50), 0.4, getRandomInt(10, -5));
 				j++;
 			}
 		}
@@ -295,14 +297,14 @@
 		function spawnAlberi(variable) {
 			console.log("Albero Creato");
 
-			if (variable % a === 0) {
-				if (a != 8) {
-					a --;
+			if (variable % b === 0) {
+				if (b != 8) {
+					b --;
 				}
-				alberi[j] = creaAlbero();
-				scene.add(alberi[j]);
-				alberi[j].position.set(getRandomInt(200,50), 4, 15);
-				j++;
+				alberi[k] = creaAlbero();
+				scene.add(alberi[k]);
+				alberi[k].position.set(150,3,getRandomInt(30,15));
+				k++;
 			}
 			/*for (var i = 0; i < -1; i++) {
 				if (i % 10 === 0) {
@@ -374,7 +376,7 @@
 
 				} else {
 					macchine[i].position.x -= 4;
-					/*albero.position.x -= 0.3;
+				//	albero[i].position.x -= 0.3;
 					//albero2.position.x -= 0.3;*/
 					//alberi[i].position.x -= 0.3;
 
@@ -383,6 +385,10 @@
 					macchine[i].position.x = -1500;
 					//removeEntity(macchine[i]);
 				}
+			}
+
+			for(var i = 0; i < k; i++) {
+				alberi[i].position.x -= 6;
 			}
 			//if(crash==true){
 
