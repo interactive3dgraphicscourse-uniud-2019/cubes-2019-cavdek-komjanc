@@ -314,17 +314,15 @@
 
 			spawnAlberi();
 
-
-			if (macchinaCompleta.position.z >= 9 || macchinaCompleta.position.z <= -5) {
-				crashed();
+			if(macchinaCompleta.position.z>=9||macchinaCompleta.position.z<=-5){crashed(counter);
 			}
 			for (var i = 0; i < j; i++) {
 				if (detectCollisionCubes(macchinaCompleta, macchine[i]) == true) {
 
 
-					console.log("HIT");
-					macchine[i].position.x = -1500;
-					crashed();
+			console.log("HIT");
+			macchine[i].position.x=-1500;
+			crashed(counter);
 
 				} else {
 					macchine[i].position.x -= 4;
