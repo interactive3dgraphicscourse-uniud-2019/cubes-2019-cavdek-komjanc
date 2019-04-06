@@ -1,0 +1,43 @@
+# Introduzione
+
+Università degli studi di Udine
+
+Corso Interactive 3D design
+
+Docente: Roberto Ranon
+
+Gruppo composto da:
+- Simon Komjanc:
+- Andrej Čavdek: 131098
+
+Anno Accademico 2018/2019
+
+## Problema
+
+Creare una scena facendo uso soltanto di box. Le box possono essere traslate, scalate e ruotate a nostro piacimento.
+
+## Analisi e scelta della scena
+
+Dopo aver discusso su cosa avremmo potuto creare per questo progetto, abbiamo deciso di creare un semplice minigioco. Con l' aiuto di three.js, una libreria/API open source in JavaScript che consente di creare e visualizzare animazioni 3D al computer su di un browser, abbiamo creato diversi modelli per costruire la nostra scena.
+
+## I Models
+
+# Macchina
+Inanzitutto abbiamo creato la macchina. Facendo uso delle box abbiamo creato varie parti della macchina come ad esempio il muso, l'alettone, le ruote etc. Infine tutte queste parti le abbiamo aggiunte al corpo principale.
+
+# Strada
+Fatto ciò abbiamo creato la strada sulla quale si svolgera il minigioco. Abbiamo definito la larghezza e aggiunto una texture.
+
+# Guard Rail
+Per rendere tutto un po' più chiaro e realistico abbiamo aggiunto anche il guard rail ai lati della strada. Anche quà abbiamo aggiunto una texture.
+
+# Albero
+Semplicemente a scopo estetico abbiamo creato anche un albero. Prima abbiamo fatto un tronco, settato le dimensioni e aggiunto una texture. Dopodichè abbiamo creato la chioma dell'albero e l'abbiamo aggiunta al tronco.
+
+## Codice principale
+
+Per questo progetto abbiamo usato il file StartingCode-withLights.html fornitoci dal docente. Per prima cosa abbiamo collegato tutti i models. Dopodichè abbiamo aggiunto la "coreboard", stilizzata con il codice css interno, con il punteggio e i comandi.
+
+Dopo aver aggiunto tutti i modelli alla scena, abbiamo creato due funzioni per lo "spawn" delle macchine e  degli alberi. Entrabi le funzioni posizionano casualmente altre macchine sulla strada. Lo stesso fa anche per gli alberi che però verranno posizionati fuori dalla strada. Entrambi le funzioni vengono richiamate nella funzione Update().
+
+Abbiamo aggiunto una funzione di controllo per verificare se due oggetti (in questo caso la macchina principale e un'altra macchina) sono entrati in collisione. anche questa funzione viene chiamata nella funzione Update() e nel caso si sia verificata una collisione il gioco finisce.
