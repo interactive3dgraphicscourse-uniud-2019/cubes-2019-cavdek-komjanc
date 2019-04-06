@@ -10,6 +10,7 @@ Creiamo un prototipo di macchina utilizzando MagicVoxel
 # 02/3/2019
 
 Iniziamo a programmare. Creiamo una macchina base e la facciamo muovere sul terreno
+![Macchina](photos/macchina.png "Macchina")
 
 # 03/03
 
