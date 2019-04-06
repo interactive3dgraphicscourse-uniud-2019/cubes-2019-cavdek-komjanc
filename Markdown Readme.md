@@ -7,7 +7,7 @@ Corso Interactive 3D design
 Docente: Roberto Ranon
 
 Gruppo composto da:
-- Simon Komjanc:
+- Simon Komjanc: 133878
 - Andrej Čavdek: 131098
 
 Anno Accademico 2018/2019
@@ -36,8 +36,11 @@ Semplicemente a scopo estetico abbiamo creato anche un albero. Prima abbiamo fat
 
 ## Codice principale
 
-Per questo progetto abbiamo usato il file StartingCode-withLights.html fornitoci dal docente. Per prima cosa abbiamo collegato tutti i models. Dopodichè abbiamo aggiunto la "coreboard", stilizzata con il codice css interno, con il punteggio e i comandi.
+Per questo progetto abbiamo usato il file StartingCode-withLights.html fornitoci dal docente. Per prima cosa abbiamo collegato tutti i models. Dopodichè abbiamo aggiunto la "scoreboard", stilizzata con il codice css interno, con il punteggio e i comandi.
 
 Dopo aver aggiunto tutti i modelli alla scena, abbiamo creato due funzioni per lo "spawn" delle macchine e  degli alberi. Entrabi le funzioni posizionano casualmente altre macchine sulla strada. Lo stesso fa anche per gli alberi che però verranno posizionati fuori dalla strada. Entrambi le funzioni vengono richiamate nella funzione Update().
 
-Abbiamo aggiunto una funzione di controllo per verificare se due oggetti (in questo caso la macchina principale e un'altra macchina) sono entrati in collisione. anche questa funzione viene chiamata nella funzione Update() e nel caso si sia verificata una collisione il gioco finisce.
+/*Abbiamo aggiunto una funzione di controllo per verificare se due oggetti (in questo caso la macchina principale e un'altra macchina) sono entrati in collisione. anche questa funzione viene chiamata nella funzione Update() e nel caso si sia verificata una collisione il gioco finisce. 
+*/
+
+Il gioco finisce in 2 modi: o quando una macchina spawnata colpisce la nostra, oppure se noi andiamo troppo sinistra o troppo a destra nel guard rail.
