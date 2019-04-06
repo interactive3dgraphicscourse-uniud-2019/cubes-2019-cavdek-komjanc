@@ -23,7 +23,7 @@ Dopo aver discusso su cosa avremmo potuto creare per questo progetto, abbiamo de
 ## I Models
 
 # Macchina
-Inanzitutto abbiamo creato la macchina. Facendo uso delle box abbiamo creato varie parti della macchina come ad esempio il muso, l'alettone, le ruote etc. Infine tutte queste parti le abbiamo aggiunte al corpo principale.
+Inanzitutto abbiamo creato la macchina. Facendo uso delle box abbiamo creato varie parti della macchina come ad esempio il muso, l'alettone, le ruote etc. Infine tutte queste parti le abbiamo aggiunte al corpo principale. Il colore delle macchine è randomico. Solo le ruote restano nere.
 ![Macchina](/photos/primoPrototipo.png "Macchina")
 
 # Strada
@@ -56,4 +56,5 @@ Il gioco parte dopo 1-2 secondi di caricamento degli oggetti e scorre con un mas
 - Rimuovere tutti i bug e problemi riscontrati precedentemente
 - Aggiungere all'inizio la scelta della difficoltà (maggiore sarà la difficoltà, maggiore sarà la velocità e il numero di macchine spawnate)
 - Salvare il record personale su un file per poi vederlo nel gioco e provarlo a batterlo. 
+- Aggiungere più decorazioni e migliorare le macchine
 
