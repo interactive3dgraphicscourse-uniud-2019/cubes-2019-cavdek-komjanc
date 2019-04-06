@@ -38,11 +38,19 @@ Semplicemente a scopo estetico abbiamo creato anche un albero. Prima abbiamo fat
 
 Per questo progetto abbiamo usato il file StartingCode-withLights.html fornitoci dal docente. Per prima cosa abbiamo collegato tutti i models. Dopodichè abbiamo aggiunto la "scoreboard", stilizzata con il codice css interno, con il punteggio e i comandi.
 
-Dopo aver aggiunto tutti i modelli alla scena, abbiamo creato due funzioni per lo "spawn" delle macchine e  degli alberi. Entrabi le funzioni posizionano casualmente altre macchine sulla strada. Lo stesso fa anche per gli alberi che però verranno posizionati fuori dalla strada. Entrambi le funzioni vengono richiamate nella funzione Update().
+Dopo aver aggiunto tutti i modelli alla scena, abbiamo creato due funzioni per lo "spawn" delle macchine e  degli alberi. Entrabi le funzioni posizionano casualmente altre macchine sulla strada. Lo stesso fa anche per gli alberi che però verranno posizionati fuori dalla strada. Entrambi le funzioni vengono richiamate nella funzione Update() e il numero di spawn aumenta in base al tempo passato.
 
 /*Abbiamo aggiunto una funzione di controllo per verificare se due oggetti (in questo caso la macchina principale e un'altra macchina) sono entrati in collisione. anche questa funzione viene chiamata nella funzione Update() e nel caso si sia verificata una collisione il gioco finisce. 
 
 Il terreno lo otteniamo partendo da un'immagine in greyscale, codificandola e in base al colore aggiungiamo la texture del terreno in varie altezze(nero altezza 0, più chiaro l'altezza aumenta).
 
 Il gioco finisce in 2 modi: o quando una macchina spawnata colpisce la nostra, oppure se noi andiamo troppo sinistra o troppo a destra nel guard rail.
+
+#Testing e problemi riscontrati
+
+Il gioco parte dopo 1-2 secondi di caricamento degli oggetti e scorre con un massimo di 40FPS. Dopo 25-30 secondi di gioco, il framerate cala ulteriormente a causa dei troppi oggetti creati. Le collisioni tra due macchine avvengono solo se si toccano al centro (non con le ali anteriori o ruote). A causa della funzione randomica, avvolte le macchine possono spawnare sovrapposte una all'altra. 
+
+#Possibili miglioramenti
+
+Rimuovere tutti i bug e problemi riscontrati precedentemente. Aggiungere all'inizio la scelta della difficoltà (maggiore sarà la difficoltà, maggiore sarà la velocità e il numero di macchine spawnate). Salvare il record personale su un file per poi vederlo nel gioco e provarlo a batterlo. 
 
