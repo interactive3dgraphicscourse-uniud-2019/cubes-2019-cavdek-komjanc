@@ -26,7 +26,7 @@
 	<script src="lib/OrbitControls.js"></script>
 	<script src="models/macchina_completa.js"></script>
 	<script src="models/guardrail.js"></script>
-	<script src="models/albero.js"></script>
+	<!--<script src="models/albero.js"></script>-->
 	<script src="models/strada.js"></script>
 
 </head>
@@ -121,7 +121,7 @@
 
 			strada=creaStrada();
 			scene.add(strada);
-			strada.position.set(45,0.01,2)
+			strada.position.set(45,0.01,2);
 
 			var fontLoader = new THREE.FontLoader();
 			fontLoader.load('fonts/helvetiker_bold.typeface.json', function(font) {
@@ -199,6 +199,26 @@
 				test1 = false;
 			}
 		}
+		function creaAlbero() {
+
+var troncoGeometry = new THREE.BoxGeometry(1,9,1);
+var textureTrunkAlbero = new THREE.ImageUtils.loadTexture('textures/trunk_texture.jpg');
+var troncoMaterial = new THREE.MeshBasicMaterial({map: textureTrunkAlbero});
+var tronco = new THREE.Mesh(troncoGeometry,troncoMaterial);
+//tronco.position.set(-1,0,3);
+
+var foglieGeometry = new THREE.BoxGeometry(5,2,5);
+var textureFoglie = new THREE.ImageUtils.loadTexture('textures/foglie_texture.jpg');
+var foglieMaterial = new THREE.MeshBasicMaterial({map: textureFoglie});
+var foglie = new THREE.Mesh(foglieGeometry,foglieMaterial);
+
+foglie.position.set(0,5,0);
+
+tronco.add(foglie);
+
+return tronco;
+}
+
 
 
 
