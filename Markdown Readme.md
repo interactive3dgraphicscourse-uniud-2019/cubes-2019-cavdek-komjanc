@@ -24,6 +24,7 @@ Dopo aver discusso su cosa avremmo potuto creare per questo progetto, abbiamo de
 
 # Macchina
 Inanzitutto abbiamo creato la macchina. Facendo uso delle box abbiamo creato varie parti della macchina come ad esempio il muso, l'alettone, le ruote etc. Infine tutte queste parti le abbiamo aggiunte al corpo principale.
+![Macchina](/../photos/primoPrototipo.png "Macchina")
 
 # Strada
 Fatto ciò abbiamo creato la strada sulla quale si svolgera il minigioco. Abbiamo definito la larghezza e aggiunto una texture.
