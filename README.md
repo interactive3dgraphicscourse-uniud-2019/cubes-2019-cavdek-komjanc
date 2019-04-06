@@ -47,6 +47,12 @@ Il terreno lo otteniamo partendo da un'immagine in greyscale, codificandola e in
 
 Il gioco finisce in 2 modi: o quando una macchina spawnata colpisce la nostra, oppure se noi andiamo troppo sinistra o troppo a destra nel guard rail.
 
+# Screenshots
+
+![Versione finale](photos/final.png "Versione finale")
+![Game over](photos/gameOver.png "Schermata Game Over")
+
+
 ## Testing e problemi riscontrati
 
 Il gioco parte dopo 1-2 secondi di caricamento degli oggetti e scorre con un massimo di 40FPS. Dopo 25-30 secondi di gioco, il framerate cala ulteriormente a causa dei troppi oggetti creati. Le collisioni tra due macchine avvengono solo se si toccano al centro (non con le ali anteriori o ruote). A causa della funzione randomica, avvolte le macchine possono spawnare sovrapposte una all'altra. 
