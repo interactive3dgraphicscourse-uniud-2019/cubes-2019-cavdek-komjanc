@@ -57,4 +57,5 @@ Il gioco parte dopo 1-2 secondi di caricamento degli oggetti e scorre con un mas
 - Aggiungere all'inizio la scelta della difficoltà (maggiore sarà la difficoltà, maggiore sarà la velocità e il numero di macchine spawnate)
 - Salvare il record personale su un file per poi vederlo nel gioco e provarlo a batterlo. 
 - Aggiungere più decorazioni e migliorare le macchine
+- Aggiungere le ombre
 
