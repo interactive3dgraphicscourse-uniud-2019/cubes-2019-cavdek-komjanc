@@ -52,5 +52,7 @@ Il gioco parte dopo 1-2 secondi di caricamento degli oggetti e scorre con un mas
 
 ## Possibili miglioramenti
 
-Rimuovere tutti i bug e problemi riscontrati precedentemente. Aggiungere all'inizio la scelta della difficoltà (maggiore sarà la difficoltà, maggiore sarà la velocità e il numero di macchine spawnate). Salvare il record personale su un file per poi vederlo nel gioco e provarlo a batterlo. 
+- Rimuovere tutti i bug e problemi riscontrati precedentemente
+- Aggiungere all'inizio la scelta della difficoltà (maggiore sarà la difficoltà, maggiore sarà la velocità e il numero di macchine spawnate)
+- Salvare il record personale su un file per poi vederlo nel gioco e provarlo a batterlo. 
 
