@@ -18,7 +18,8 @@ Creiamo le entità albero e aggiungiamo nella scena. Implementiamo il movimento 
 
 # 04/03
 
-Aggiungiamo una funzione per spawnare macchine e alberi e farli muovere verso la nostra macchina. Quando c'è una collisione, appare "Game over"
+Aggiungiamo una funzione per spawnare 10 macchine e 2 alberi e farli muovere verso la nostra macchina. Quando c'è una collisione, appare "Game over"
+![Collisone](photos/collisioni1.0.png "Collisone")
 
 # 05/03
 
