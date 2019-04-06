@@ -12,7 +12,7 @@ Gruppo composto da:
 
 Anno Accademico 2018/2019
 
-## Problema
+## Obiettivo
 
 Creare una scena facendo uso soltanto di box. Le box possono essere traslate, scalate e ruotate a nostro piacimento.
 
