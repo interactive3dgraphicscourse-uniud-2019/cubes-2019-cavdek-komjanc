@@ -24,3 +24,8 @@ Aggiungiamo una funzione per spawnare 10 macchine e 2 alberi e farli muovere ver
 # 05/03
 
 Aggiungiamo il terreno, la strada e le decorazioni. Aggiungiamo anche uno scoreboard
+![Versione finale](photos/final.png "Versione finale")
+Iniziamo a scrivere la relazione
+
+# 06/03
+La funzione esterna creaAlbero(); non funziona più, la spostiamo dentro al file principale. 
