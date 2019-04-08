@@ -48,8 +48,7 @@
 
 	<script>
 		var scene, camera, renderer, controls, stats;
-		var xSpeed = 0.8;
-		var ySpeed = 0.8;
+		var xSpeed = 0.8;  //velocità nello spostamento della macchina principale
 		var collision = false;
 		var testo2;
 		var macchine = [];
@@ -62,7 +61,7 @@
 		var objects = [];
 
 		function Start() {
-			j = 0;
+			j = 0; //inizializzazzione delle variabili globali
 			a = 60;
 			b=60;
 			k=0;
@@ -109,19 +108,19 @@
 			
 			macchinaCompleta = creaMacchinaCompleta();
 			scene.add(macchinaCompleta);
-			macchinaCompleta.position.set(-5, 0.4, 0);
+			macchinaCompleta.position.set(-5, 0.4, 0); //aggiungiamo la nostra macchina
 
 			guardRailDx = creaGuardRail();
 			scene.add(guardRailDx);
-			guardRailDx.position.set(35, 0.8, 10.8);
+			guardRailDx.position.set(35, 0.8, 10.8); //aggiungiamo il guard rail destro
 
 			guardRailSx = creaGuardRail();
 			scene.add(guardRailSx);
-			guardRailSx.position.set(35, 0.8, -6.8);
+			guardRailSx.position.set(35, 0.8, -6.8); //aggiungiamo il guard sinistro
 
 			strada=creaStrada();
 			scene.add(strada);
-			strada.position.set(45,0.01,2);
+			strada.position.set(45,0.01,2); //aggiungiamo la strada
 
 			var fontLoader = new THREE.FontLoader();
 			fontLoader.load('fonts/helvetiker_bold.typeface.json', function(font) {
@@ -144,15 +143,14 @@
 				testo2.position.set(50, 100, 0);
 				testo2.rotation.y = Math.PI / (2 / 3);
 				testo2.translateX(-60);
-			});
+			}); // il testo GAME OVER
 
 			setGround();
 		}
 
-		function spawnMacchine(variabile) {
-			console.log("insidee");
+		function spawnMacchine(variabile) { //crea le macchine in posizione randomica(con dei limiti)
 
-			if (variabile % a === 0) {
+			if (variabile % a === 0) { //la funzione cresce in base al tempo
 				if (a != 8) {
 					a--;
 				}
@@ -163,7 +161,7 @@
 			}
 		}
 
-		function spawnAlberi(variable) {
+		function spawnAlberi(variable) { //stessa funzione di spawnMacchine() ma con gli alberi
 			console.log("Albero Creato");
 
 			if (variable % b === 0) {
@@ -177,8 +175,8 @@
 			}
 		}
 
-		function detectCollisionCubes(object1, object2) {
-			object1.geometry.computeBoundingBox(); //not needed if its already calculated
+		function detectCollisionCubes(object1, object2) { //funzione che ritorna true se 2 oggetti entrano in collisone
+			object1.geometry.computeBoundingBox(); 
 			object2.geometry.computeBoundingBox();
 			object1.updateMatrixWorld();
 			object2.updateMatrixWorld();
@@ -192,7 +190,7 @@
 			return box1.intersectsBox(box2);
 		}
 
-		function crashed(counter) {
+		function crashed(counter) { //funzione che gira la telecamera e mostra game over e ferma il punteggio
 			if (test1 == true) {
 				camera.position.y = 100;
 				document.querySelector('.score').innerHTML = counter;
@@ -200,13 +198,12 @@
 			}
         }
         
-		function creaAlbero() {
+		function creaAlbero() { //questaa funzione crea un albero. All'inizio era una funzione esterna al file, poi l'abbiamo dovuta includere in questo file per farla funzionare
 
             var troncoGeometry = new THREE.BoxGeometry(1,9,1);
             var textureTrunkAlbero = new THREE.ImageUtils.loadTexture('textures/trunk_texture.jpg');
             var troncoMaterial = new THREE.MeshBasicMaterial({map: textureTrunkAlbero});
             var tronco = new THREE.Mesh(troncoGeometry,troncoMaterial);
-            //tronco.position.set(-1,0,3);
 
             var foglieGeometry = new THREE.BoxGeometry(5,2,5);
             var textureFoglie = new THREE.ImageUtils.loadTexture('textures/foglie_texture.jpg');
@@ -226,26 +223,26 @@
 
 		function Update() {
 
-			counter++;
+			counter++; //per il punteggio e anche per lo spawn
 			document.querySelector('.time').innerHTML = counter;
 
 			spawnMacchine(counter);
 
 			spawnAlberi(counter);
 
-			if (macchinaCompleta.position.z >= 9 || macchinaCompleta.position.z <= -5) {
+			if (macchinaCompleta.position.z >= 9 || macchinaCompleta.position.z <= -5) { //se andiamo sul guardrail
 				crashed(counter);
 			}
 			for (var i = 0; i < j; i++) {
 				if (detectCollisionCubes(macchinaCompleta, macchine[i]) == true) {
 
-					macchine[i].position.x = -1500;
-					crashed(counter);
+					macchine[i].position.x = -1500;     //spostiamo le macchine già passate
+					crashed(counter);					
 
 				} else {
-					macchine[i].position.x -= 4;			
+					macchine[i].position.x -= 4;		//la velocità delle macchine che ci vanno incontro	
 				}
-				if (macchine[i].position.x < -20) {
+				if (macchine[i].position.x < -20) {  
 					macchine[i].position.x = -1500;
 				}
 			}
@@ -261,7 +258,7 @@
 
 		}
 		
-		function getRandomInt(max, min) {
+		function getRandomInt(max, min) {  //restituisce un valore randomico(anche negativo)
 			var a;
 			a = Math.floor(Math.random() * Math.floor(max));
 			if (Math.random() <= 0.5) {
@@ -272,7 +269,7 @@
 			}
 		}
 
-		function getHeightData(img, scale) {
+		function getHeightData(img, scale) { //funzione per il terreno
 
             if (scale == undefined) scale = 1;
             
@@ -303,7 +300,7 @@
 			return data;
 		}
 
-		function setGround() {
+		function setGround() { //funzione per il terreno
 			terrain = new THREE.Object3D();
 			img = new Image();
 			img.src = "textures/heightmap.png";
