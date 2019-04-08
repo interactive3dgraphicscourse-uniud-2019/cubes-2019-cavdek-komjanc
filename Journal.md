@@ -29,4 +29,4 @@ Iniziamo a scrivere la relazione
 
 # 06/03
 La funzione esterna creaAlbero(); non funziona più, la spostiamo dentro al file principale. 
-Miglioriamo la visibilità del codice e finimo la relazione.
+Miglioriamo la visibilità del codice, aggiungiamo i commenti e finimo la relazione.
